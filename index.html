@@ -4,15 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Oluwatobi Amusa | Creative Professional</title>
-    <meta name="description"
-        content="Portfolio of Oluwatobi Amusa, a highly skilled creative professional and software engineer.">
+    <title>Linker | Architect</title>
+    <meta name="description" content="Senior Software Engineer & System Architect.">
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@300;400;500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap"
         rel="stylesheet">
 
     <!-- Styles -->
@@ -22,119 +21,133 @@
 <body>
     <main>
         <!-- Hero Section -->
-        <section id="hero" class="hero-section">
+        <section class="hero">
             <div class="hero-content">
-                <h1>Oluwatobi Amusa</h1>
-                <p class="subtitle">Highly Skilled Creative Professional</p>
+                <div class="profile-container">
+                    <img src="assets/images/01.jpg" alt="Oluwatobi Amusa" class="profile-img">
+                </div>
+                <h1 class="hero-title">LINKER</h1>
+                <p class="hero-subtitle">Senior Software Engineer. <span class="accent">System Architect.</span></p>
             </div>
-            <div class="hero-image-container">
-                <img src="assets/images/01.jpg" alt="Oluwatobi Amusa">
-            </div>
-        </section>
-
-        <!-- The Craft Section -->
-        <section id="craft" class="content-section split-layout">
-            <div class="content-text">
-                <h2>The Craft</h2>
-                <p>Engineering is more than just code; it's about architecting resilient systems that scale. I
-                    specialize in translating complex business requirements into elegant, high-performance technical
-                    solutions.</p>
-                <p>My approach combines deep technical expertise with a product-first mindset, ensuring that every line
-                    of code drives tangible value.</p>
-            </div>
-            <div class="content-image">
-                <img src="assets/images/02.jpg" alt="Coding Session">
+            <div class="scroll-indicator">
+                <span>Scroll to Explore</span>
             </div>
         </section>
 
-        <!-- Leadership Section -->
-        <section id="leadership" class="content-section split-layout reverse">
-            <div class="content-text">
-                <h2>Leadership & Mentorship</h2>
-                <p>True seniority is defined by the ability to elevate those around you. I am deeply committed to
-                    fostering a culture of technical excellence and continuous learning.</p>
-                <p>Leading by example, I mentor engineers to think critically, challenge assumptions, and build with
-                    precision and purpose.</p>
-            </div>
-            <div class="content-image-grid">
-                <img src="assets/images/03.png" alt="Mentoring Session 1">
-                <img src="assets/images/04.JPG" alt="Mentoring Session 2">
+        <!-- The Narrative (Scrollytelling) -->
+        <section class="narrative">
+            <div class="narrative-container">
+                <!-- Chapter 1: The Craft -->
+                <div class="chapter">
+                    <div class="chapter-content">
+                        <span class="chapter-label">01 / THE CRAFT</span>
+                        <h2>I don't just write code. <br>I architect systems.</h2>
+                        <p>Engineering is about translating complex requirements into resilient, scalable solutions.
+                            Every line of code is a decision.</p>
+                    </div>
+                    <div class="chapter-visual">
+                        <img src="assets/images/02.jpg" alt="Coding">
+                    </div>
+                </div>
+
+                <!-- Chapter 2: Leadership -->
+                <div class="chapter">
+                    <div class="chapter-content">
+                        <span class="chapter-label">02 / LEADERSHIP</span>
+                        <h2>Elevating the standard.</h2>
+                        <p>True seniority is defined by the ability to lift others. I build culture, mentor engineers,
+                            and foster technical excellence.</p>
+                    </div>
+                    <div class="chapter-visual">
+                        <div class="grid-2">
+                            <img src="assets/images/03.png" alt="Mentoring">
+                            <img src="assets/images/04.JPG" alt="Team">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Chapter 3: The Environment -->
+                <div class="chapter">
+                    <div class="chapter-content">
+                        <span class="chapter-label">03 / THE WORKSHOP</span>
+                        <h2>Engineered for focus.</h2>
+                        <p>A disciplined mind requires a disciplined environment. My workspace is a command center for
+                            creativity.</p>
+                    </div>
+                    <div class="chapter-visual">
+                        <img src="assets/images/06.JPG" alt="Workspace">
+                    </div>
+                </div>
             </div>
         </section>
 
-        <!-- The Workshop Section -->
-        <section id="workshop" class="content-section split-layout">
-            <div class="content-image">
-                <img src="assets/images/06.JPG" alt="My Desk Setup">
-            </div>
-            <div class="content-text">
-                <h2>The Workshop</h2>
-                <p>A disciplined mind requires a disciplined environment. My workspace is engineered for deep work—a
-                    command center where ideas are forged into reality.</p>
-                <p>Every component is optimized for peak performance, reflecting the same standards I apply to my
-                    software.</p>
-            </div>
-        </section>
-
-        <!-- The Build Section -->
-        <section id="build" class="build-section">
+        <!-- The Build (Bento Grid) -->
+        <section class="build">
             <div class="container">
-                <h2>The Build</h2>
-                <p class="build-intro">I don't just accept the status quo; I engineer solutions. When off-the-shelf
-                    hardware failed to meet my rigorous standards for performance and aesthetics, I architected my own.
-                </p>
+                <div class="section-header">
+                    <span class="chapter-label">04 / THE BUILD</span>
+                    <h2>The Masterpiece</h2>
+                    <p>When the market didn't offer what I needed, I built it myself.</p>
+                </div>
 
-                <div class="build-gallery-container">
-                    <div class="build-gallery">
-                        <div class="gallery-item">
-                            <img src="assets/images/07.jpg" alt="The Expensive Option">
-                            <p class="caption">The Constraint: Market Inefficiency</p>
+                <div class="bento-grid">
+                    <div class="bento-item large">
+                        <img src="assets/images/12.JPG" alt="The Reveal">
+                        <div class="bento-overlay">
+                            <h3>The Result</h3>
+                            <p>Precision Engineering</p>
                         </div>
-                        <div class="gallery-item">
-                            <img src="assets/images/08.jpg" alt="Starting the Build">
-                            <p class="caption">The Foundation</p>
+                    </div>
+                    <div class="bento-item medium">
+                        <img src="assets/images/07.jpg" alt="Constraint">
+                        <div class="bento-overlay">
+                            <h3>The Constraint</h3>
+                            <p>Market Inefficiency</p>
                         </div>
-                        <div class="gallery-item">
-                            <img src="assets/images/09.JPG" alt="Build in Progress">
-                            <p class="caption">System Integration</p>
+                    </div>
+                    <div class="bento-item medium">
+                        <img src="assets/images/08.jpg" alt="Foundation">
+                        <div class="bento-overlay">
+                            <h3>The Foundation</h3>
+                            <p>Starting from Scratch</p>
                         </div>
-                        <div class="gallery-item">
-                            <!-- 10.MOV excluded -->
-                            <img src="assets/images/11.JPG" alt="Almost Done">
-                            <p class="caption">Optimization</p>
+                    </div>
+                    <div class="bento-item wide">
+                        <img src="assets/images/09.JPG" alt="Progress">
+                        <div class="bento-overlay">
+                            <h3>Integration</h3>
+                            <p>System Assembly</p>
                         </div>
-                        <div class="gallery-item">
-                            <img src="assets/images/12.JPG" alt="Finished Build 1">
-                            <p class="caption">The Reveal</p>
-                        </div>
-                        <div class="gallery-item">
-                            <img src="assets/images/13.jpg" alt="Finished Build 2">
-                            <p class="caption">Precision Engineering</p>
-                        </div>
-                        <div class="gallery-item">
-                            <img src="assets/images/14.JPG" alt="Finished Build 3">
-                            <p class="caption">Operational</p>
+                    </div>
+                    <div class="bento-item small">
+                        <img src="assets/images/11.JPG" alt="Detail">
+                    </div>
+                    <div class="bento-item small">
+                        <img src="assets/images/13.jpg" alt="Detail">
+                    </div>
+                    <div class="bento-item wide">
+                        <img src="assets/images/14.JPG" alt="Complete">
+                        <div class="bento-overlay">
+                            <h3>Operational</h3>
+                            <p>Ready for Deployment</p>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Contact Section -->
-        <section id="contact" class="contact-section">
+        <!-- Footer -->
+        <footer class="footer">
             <div class="container">
-                <h2>Let's Connect</h2>
-                <p>I'm always open to discussing new projects, creative ideas, or opportunities to be part of your
-                    visions.</p>
-
-                <div class="contact-links">
-                    <a href="assets/images/15.pdf" target="_blank" class="btn">Download Resume</a>
-                    <a href="https://github.com/zealbell" target="_blank" class="btn btn-outline">GitHub</a>
-                    <a href="https://stackoverflow.com/users/10138416/linker" target="_blank"
-                        class="btn btn-outline">Stack Overflow</a>
+                <h2>Let's Build the Future.</h2>
+                <div class="footer-links">
+                    <a href="assets/images/15.pdf" class="btn-primary">Download Resume</a>
+                    <a href="https://github.com/zealbell" class="link">GitHub</a>
+                    <a href="https://stackoverflow.com/users/10138416/linker" class="link">Stack Overflow</a>
                 </div>
+                <p class="copyright">© 2025 Linker. Engineered with precision.</p>
             </div>
-        </section>
+        </footer>
     </main>
 
     <script src="js/app.js"></script>

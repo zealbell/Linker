@@ -48,7 +48,7 @@ h3 {
 
 /* Hero Section */
 .hero {
-    height: 100vh;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -58,14 +58,15 @@ h3 {
     padding: 2rem;
 }
 
-.profile-container {
-    width: 120px;
-    height: 120px;
-    margin-bottom: 2rem;
-    border-radius: 35px;
-    /* Squircle approximation */
+.profile-container-large {
+    width: 50vw;
+    max-width: 500px;
+    aspect-ratio: 1;
+    margin-bottom: 3rem;
+    border-radius: 20%;
+    /* Squircle */
     overflow: hidden;
-    box-shadow: 0 0 40px rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 60px rgba(255, 255, 255, 0.05);
     animation: float 6s ease-in-out infinite;
 }
 
@@ -75,92 +76,135 @@ h3 {
     object-fit: cover;
 }
 
-.hero-title {
-    font-size: clamp(3rem, 10vw, 8rem);
-    font-weight: 800;
-    line-height: 1;
+.hero-name {
+    font-family: var(--font-heading);
+    font-size: clamp(2.5rem, 6vw, 5rem);
+    font-weight: 700;
+    line-height: 1.1;
     margin-bottom: 1rem;
-    background: linear-gradient(180deg, #fff, #888);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
 }
 
-.hero-subtitle {
-    font-size: 1.5rem;
+.hero-role {
+    font-family: var(--font-display);
+    font-size: clamp(1rem, 2vw, 1.5rem);
     color: var(--text-secondary);
+    font-weight: 400;
 }
 
-.hero-subtitle .accent {
+.hero-role .accent {
     color: var(--text-primary);
+    font-weight: 600;
 }
 
-.scroll-indicator {
-    position: absolute;
-    bottom: 2rem;
-    font-family: var(--font-mono);
-    font-size: 0.8rem;
-    color: var(--text-secondary);
-    opacity: 0.6;
-    animation: bounce 2s infinite;
-}
-
-/* Narrative Section */
-.narrative {
-    padding: 4rem 0;
-}
-
-.chapter {
+/* Timeline Section */
+.timeline-section {
+    position: relative;
+    padding: 8rem 0;
+    overflow: hidden;
     min-height: 100vh;
     display: flex;
     align-items: center;
-    justify-content: center;
-    padding: 4rem 2rem;
+}
+
+.timeline-background {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 25vw;
+    font-weight: 800;
+    color: #1a1a1a;
+    z-index: 0;
+    pointer-events: none;
+    white-space: nowrap;
+    font-family: var(--font-display);
+    letter-spacing: -0.05em;
+}
+
+.timeline-container {
+    display: flex;
     gap: 4rem;
-    max-width: 1400px;
-    margin: 0 auto;
-}
-
-.chapter:nth-child(even) {
-    flex-direction: row-reverse;
-}
-
-.chapter-content {
-    flex: 1;
-    max-width: 500px;
-}
-
-.chapter-content h2 {
-    font-size: 3rem;
-    margin-bottom: 1.5rem;
-    line-height: 1.1;
-}
-
-.chapter-content p {
-    font-size: 1.25rem;
-    color: var(--text-secondary);
-    line-height: 1.6;
-}
-
-.chapter-visual {
-    flex: 1;
-    position: relative;
-}
-
-.chapter-visual img {
+    overflow-x: auto;
+    padding: 4rem 50vw 4rem 4rem;
+    /* Padding to allow last item to center */
+    scroll-snap-type: x mandatory;
+    z-index: 1;
     width: 100%;
-    border-radius: var(--radius-lg);
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    scrollbar-width: none;
+    /* Firefox */
+}
+
+.timeline-container::-webkit-scrollbar {
+    display: none;
+}
+
+.timeline-item {
+    flex: 0 0 auto;
+    width: 400px;
+    scroll-snap-align: center;
+}
+
+.timeline-card {
+    background: rgba(20, 20, 20, 0.8);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 40px;
+    padding: 2rem;
+    height: 100%;
+    transition: transform 0.4s var(--transition);
+}
+
+.timeline-item:hover .timeline-card {
+    transform: translateY(-10px);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.card-visual {
+    width: 100%;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-bottom: 2rem;
+    border: 4px solid rgba(255, 255, 255, 0.05);
+}
+
+.card-visual img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
     transition: transform 0.6s var(--transition);
 }
 
-.chapter-visual img:hover {
-    transform: scale(1.02);
+.timeline-card:hover .card-visual img {
+    transform: scale(1.1);
 }
 
-.grid-2 {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1rem;
+.card-content h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.card-content p {
+    color: var(--text-secondary);
+    line-height: 1.5;
+}
+
+@media (max-width: 768px) {
+    .profile-container-large {
+        width: 80vw;
+    }
+
+    .timeline-item {
+        width: 85vw;
+    }
+
+    .timeline-container {
+        padding: 2rem 2rem;
+        gap: 1rem;
+    }
 }
 
 /* Build Section (Bento Grid) */
@@ -265,6 +309,7 @@ h3 {
     margin-bottom: 3rem;
     background: linear-gradient(180deg, #fff, #444);
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 

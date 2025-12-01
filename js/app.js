@@ -16,7 +16,7 @@ const observer = new IntersectionObserver((entries) => {
 }, observerOptions);
 
 // Add fade-in classes to elements
-document.querySelectorAll('.chapter, .bento-item').forEach(el => {
+document.querySelectorAll('.timeline-item, .bento-item').forEach(el => {
     el.classList.add('fade-in-section');
     observer.observe(el);
 });

@@ -55,8 +55,9 @@ body {
 
 .dp-wrapper {
     position: relative;
-    width: 180px;
-    height: 180px;
+    width: 200px;
+    /* 8 units */
+    height: 200px;
     z-index: 10;
     transition: all var(--transition-duration) var(--spring-easing);
     border-radius: 50%;
@@ -84,8 +85,6 @@ body {
 
 .social-btn {
     position: absolute;
-    width: 50px;
-    height: 50px;
     border-radius: 50%;
     background-color: #ffffff;
     display: flex;
@@ -96,12 +95,11 @@ body {
     pointer-events: auto;
     text-decoration: none;
     overflow: hidden;
-    padding: 10px;
+    padding: 5px;
+    /* Reduced padding for smaller buttons */
     box-sizing: border-box;
     top: 0;
     left: 0;
-    margin-top: -25px;
-    margin-left: -25px;
 }
 
 .social-btn img {
@@ -110,12 +108,30 @@ body {
     object-fit: contain;
 }
 
-/* 
-   Positioning Logic:
-   Increased offsets to move buttons further from DP by default.
-   Previous: 105/130
-   New: 140/170 (approx +35px)
-*/
+/* Sizing & Positioning */
+/* Base Unit ~25px */
+
+/* Large Buttons (2 units = 50px) */
+.social-btn.resume,
+.social-btn.gmail,
+.social-btn.linkedin,
+.social-btn.call {
+    width: 50px;
+    height: 50px;
+    margin-top: -25px;
+    margin-left: -25px;
+    padding: 10px;
+}
+
+/* Small Buttons (1 unit = 25px) */
+.social-btn.github,
+.social-btn.stackoverflow {
+    width: 25px;
+    height: 25px;
+    margin-top: -12.5px;
+    margin-left: -12.5px;
+    padding: 5px;
+}
 
 /* Left Group */
 .social-btn.resume {
@@ -148,16 +164,13 @@ body {
 
 /* DP Squircle - ONLY on direct DP hover */
 .dp-wrapper:hover {
-    width: 220px;
-    height: 220px;
+    width: 240px;
+    /* Expanded size */
+    height: 240px;
     border-radius: 25%;
 }
 
 /* Expansion on Container Hover */
-/* Push further out on hover */
-/* Previous Expanded: 160/190 */
-/* New Expanded: 200/230 */
-
 .interactive-area:hover .social-btn.resume {
     transform: translate(-230px, 0);
     opacity: 0.1;
@@ -188,44 +201,7 @@ body {
     opacity: 0.1;
 }
 
-/* Individual Button Hover */
-/* Scale up and full opacity */
-
-.interactive-area:hover .social-btn.resume:hover {
-    transform: translate(-230px, 0) scale(1.3);
-    opacity: 1 !important;
-    z-index: 20;
-}
-
-.interactive-area:hover .social-btn.gmail:hover {
-    transform: translate(-200px, -90px) scale(1.3);
-    opacity: 1 !important;
-    z-index: 20;
-}
-
-.interactive-area:hover .social-btn.github:hover {
-    transform: translate(-200px, 90px) scale(1.3);
-    opacity: 1 !important;
-    z-index: 20;
-}
-
-.interactive-area:hover .social-btn.call:hover {
-    transform: translate(230px, 0) scale(1.3);
-    opacity: 1 !important;
-    z-index: 20;
-}
-
-.interactive-area:hover .social-btn.linkedin:hover {
-    transform: translate(200px, -90px) scale(1.3);
-    opacity: 1 !important;
-    z-index: 20;
-}
-
-.interactive-area:hover .social-btn.stackoverflow:hover {
-    transform: translate(200px, 90px) scale(1.3);
-    opacity: 1 !important;
-    z-index: 20;
-}
+/* No individual button hover effects as requested */
 
 
 /* Text Section */

@@ -6,9 +6,11 @@
 :root {
     --bg-color: #000000;
     --text-color: #ffffff;
-    --accent-color: #666666;
+    --subtitle-color-1: #737373;
+    /* System Architect */
+    --subtitle-color-2: #545454;
+    /* Artist */
     --spring-easing: cubic-bezier(0.34, 1.56, 0.64, 1);
-    /* Springy effect */
     --transition-duration: 0.6s;
 }
 
@@ -35,8 +37,8 @@ body {
 /* Profile Section */
 .profile-section {
     position: relative;
-    width: 400px;
-    /* Adjust based on needs */
+    width: 500px;
+    /* Increased to accommodate buttons */
     height: 300px;
     display: flex;
     justify-content: center;
@@ -50,7 +52,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    cursor: pointer;
+    /* cursor: pointer; removed to allow button clicks */
 }
 
 .dp-wrapper {
@@ -62,6 +64,8 @@ body {
     border-radius: 50%;
     overflow: hidden;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+    /* DP is interactive */
 }
 
 .dp-image {
@@ -79,7 +83,6 @@ body {
     width: 100%;
     height: 100%;
     pointer-events: none;
-    /* Let clicks pass through to DP initially */
     z-index: 5;
 }
 
@@ -88,191 +91,264 @@ body {
     width: 50px;
     height: 50px;
     border-radius: 50%;
-    background-color: #333;
-    /* Fallback */
+    background-color: #ffffff;
+    /* White background */
     display: flex;
     justify-content: center;
     align-items: center;
     opacity: 0.2;
+    /* Default opacity */
     transition: all var(--transition-duration) var(--spring-easing);
     pointer-events: auto;
     text-decoration: none;
     overflow: hidden;
+    padding: 10px;
+    /* Inward padding */
+    box-sizing: border-box;
 }
 
 .social-btn img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
-    border-radius: 50%;
+    object-fit: contain;
+    /* Contain to respect padding */
 }
 
-/* Initial Positions (Clustered behind/near DP) */
-/* We'll center them initially */
-.social-btn {
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(0.8);
+/* Default Positions (Visible beside DP) */
+/* Left Group: Github, Resume, Gmail */
+.social-btn.github {
+    transform: translate(calc(-50% - 110px), calc(-50% + 50px));
 }
+
+.social-btn.resume {
+    transform: translate(calc(-50% - 140px), -50%);
+}
+
+.social-btn.gmail {
+    transform: translate(calc(-50% - 110px), calc(-50% - 50px));
+}
+
+/* Right Group: Linkedin, Call, Stackoverflow */
+.social-btn.linkedin {
+    transform: translate(calc(-50% + 110px), calc(-50% - 50px));
+}
+
+.social-btn.call {
+    transform: translate(calc(-50% + 140px), -50%);
+}
+
+.social-btn.stackoverflow {
+    transform: translate(calc(-50% + 110px), calc(-50% + 50px));
+}
+
 
 /* Hover Effects */
 
-/* When Interactive Area is Hovered */
-.interactive-area:hover .dp-wrapper {
+/* DP Hover: Expand buttons & Squircle */
+.dp-wrapper:hover {
     width: 220px;
     height: 220px;
     border-radius: 25%;
     /* Squircle */
 }
 
-/* Button Expansions */
-/* Left Arc */
-.interactive-area:hover .social-btn.gmail {
-    transform: translate(calc(-50% - 130px), calc(-50% - 60px));
+/* When DP is hovered, target sibling buttons via parent interaction logic or JS? 
+   CSS sibling selector (+) or general sibling (~) works if DP is before buttons.
+   In HTML, buttons are BEFORE DP. So we can't use + or ~ to affect buttons when DP is hovered.
+   We need to hover the PARENT (.interactive-area) to trigger effects.
+*/
+
+.interactive-area:hover .dp-wrapper {
+    width: 220px;
+    height: 220px;
+    border-radius: 25%;
+}
+
+/* Expansion on Container Hover */
+.interactive-area:hover .social-btn.github {
+    transform: translate(calc(-50% - 150px), calc(-50% + 70px));
     opacity: 0.1;
 }
 
 .interactive-area:hover .social-btn.resume {
-    transform: translate(calc(-50% - 160px), -50%);
+    transform: translate(calc(-50% - 190px), -50%);
     opacity: 0.1;
 }
 
-.interactive-area:hover .social-btn.github {
-    transform: translate(calc(-50% - 130px), calc(-50% + 60px));
+.interactive-area:hover .social-btn.gmail {
+    transform: translate(calc(-50% - 150px), calc(-50% - 70px));
     opacity: 0.1;
 }
 
-/* Right Arc */
 .interactive-area:hover .social-btn.linkedin {
-    transform: translate(calc(-50% + 130px), calc(-50% - 60px));
+    transform: translate(calc(-50% + 150px), calc(-50% - 70px));
     opacity: 0.1;
 }
 
 .interactive-area:hover .social-btn.call {
-    transform: translate(calc(-50% + 160px), -50%);
+    transform: translate(calc(-50% + 190px), -50%);
     opacity: 0.1;
 }
 
 .interactive-area:hover .social-btn.stackoverflow {
-    transform: translate(calc(-50% + 130px), calc(-50% + 60px));
+    transform: translate(calc(-50% + 150px), calc(-50% + 70px));
     opacity: 0.1;
 }
 
 /* Individual Button Hover */
 .social-btn:hover {
     opacity: 1 !important;
-    /* Override the 0.1 from parent hover */
     z-index: 20;
-    transform: translate(-50%, -50%) scale(1.3) !important;
-    /* Keep position but scale */
-}
-
-/* We need to maintain the translated position on hover. 
-   The problem with the above line is it resets the translate.
-   We need to target each button specifically for its hover state to keep its position.
-*/
-
-.interactive-area:hover .social-btn.gmail:hover {
-    transform: translate(calc(-50% - 130px), calc(-50% - 60px)) scale(1.3);
-}
-
-.interactive-area:hover .social-btn.resume:hover {
-    transform: translate(calc(-50% - 160px), -50%) scale(1.3);
+    /* We need to re-apply the transform for the specific button to scale it */
+    /* This is tricky because the base transform depends on the state (expanded or not).
+       If we hover a button, the parent is also hovered, so it's in expanded state.
+       So we just need to add scale to the expanded transform.
+    */
 }
 
 .interactive-area:hover .social-btn.github:hover {
-    transform: translate(calc(-50% - 130px), calc(-50% + 60px)) scale(1.3);
+    transform: translate(calc(-50% - 150px), calc(-50% + 70px)) scale(1.3);
+}
+
+.interactive-area:hover .social-btn.resume:hover {
+    transform: translate(calc(-50% - 190px), -50%) scale(1.3);
+}
+
+.interactive-area:hover .social-btn.gmail:hover {
+    transform: translate(calc(-50% - 150px), calc(-50% - 70px)) scale(1.3);
 }
 
 .interactive-area:hover .social-btn.linkedin:hover {
-    transform: translate(calc(-50% + 130px), calc(-50% - 60px)) scale(1.3);
+    transform: translate(calc(-50% + 150px), calc(-50% - 70px)) scale(1.3);
 }
 
 .interactive-area:hover .social-btn.call:hover {
-    transform: translate(calc(-50% + 160px), -50%) scale(1.3);
+    transform: translate(calc(-50% + 190px), -50%) scale(1.3);
 }
 
 .interactive-area:hover .social-btn.stackoverflow:hover {
-    transform: translate(calc(-50% + 130px), calc(-50% + 60px)) scale(1.3);
+    transform: translate(calc(-50% + 150px), calc(-50% + 70px)) scale(1.3);
 }
 
 
 /* Text Section */
 .text-section {
-    display: grid;
-    grid-template-columns: 1fr auto 1fr;
-    column-gap: 2rem;
-    row-gap: 0.5rem;
-    width: 100%;
-    max-width: 800px;
-    padding: 0 2rem;
-    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+    /* Space between Amusa and Oluwatobi blocks */
+    align-items: flex-start;
 }
 
-.main-name {
-    grid-column: 1 / -1;
+.text-block {
     display: flex;
-    justify-content: space-between;
-    margin: 0;
+    flex-direction: column;
+}
+
+.name {
     font-size: 4rem;
-    font-weight: bold;
-    letter-spacing: 2px;
+    /* Base size, might need adjustment */
+    margin: 0;
+    line-height: 1;
     text-transform: uppercase;
 }
 
-.name-part {
-    /* Flex handles alignment */
+.subtitle {
+    font-size: 1rem;
+    color: #888;
+    /* Fallback */
+    margin-top: 0.5rem;
+    white-space: nowrap;
 }
 
-.titles-row {
-    grid-column: 1 / -1;
-    display: grid;
-    grid-template-columns: 1fr auto 1fr;
+/* Left Block Alignment */
+.left-block {
+    align-items: flex-start;
+    width: min-content;
+    /* Shrink to fit content */
+}
+
+.left-block .name {
+    /* Amusa needs to span "Senior Software Engineer" */
+    /* We can use text-align-last: justify if we set a fixed width? 
+       Better: Use flexbox on the name characters? No, user said "texts of same font size".
+       "Both need to be slighly bigger (font size) such that the width in pixels for "Amusa" spans the "Senior Software Engineer" text currently below it."
+       This implies we adjust font-size of AMUSA until it matches width of Senior Software Engineer?
+       Or we force the width of the container to be the width of "Senior Software Engineer" and justify "AMUSA".
+    */
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+/* We need to split AMUSA into spans? Or use letter-spacing?
+   User said "Amusa spans Senior Software Engineer".
+   If I set width: 100% on .name, and .left-block width is determined by .subtitle (which is longer),
+   then .name will stretch if I use flex/justify.
+   But .name is text.
+   Let's try `text-align: justify; text-align-last: justify;`
+*/
+
+.left-block .name {
+    text-align: justify;
+    text-align-last: justify;
     width: 100%;
 }
 
-.title {
-    font-size: 1rem;
-    color: #888;
-    text-transform: capitalize;
+/* Right Block Alignment */
+.right-block {
+    align-items: flex-start;
+    width: min-content;
 }
 
-.title.left {
-    text-align: left;
-    /* Align with Amusa */
+.right-block .name {
+    /* Oluwatobi spans "System Architect ... Artist" */
+    width: 100%;
+    text-align: justify;
+    text-align-last: justify;
 }
 
-.title.center {
-    text-align: center;
+.subtitle-row {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 0.5rem;
 }
 
-.title.right {
-    text-align: right;
-    /* Align with Oluwatobi */
+.subtitle.system-architect {
+    color: var(--subtitle-color-1);
 }
 
-/* Responsive Tweaks */
+.subtitle.artist {
+    color: var(--subtitle-color-2);
+}
+
+/* Font Size Adjustments */
+/* User said "Both need to be slightly bigger" */
+.name {
+    font-size: 5rem;
+}
+
+.subtitle {
+    font-size: 1.2rem;
+}
+
+/* Responsive */
 @media (max-width: 768px) {
-    .main-name {
-        font-size: 2.5rem;
+    .text-section {
         flex-direction: column;
         align-items: center;
-        gap: 0.5rem;
     }
 
-    .titles-row {
-        display: flex;
-        flex-direction: column;
+    .left-block,
+    .right-block {
         align-items: center;
-        gap: 0.5rem;
     }
 
-    .title {
-        text-align: center !important;
+    .name {
+        text-align: center;
+        text-align-last: center;
     }
 
-    .interactive-area:hover .social-btn {
-        /* Reduce spread on mobile */
-        /* ... logic for mobile if needed, but sticking to desktop first */
-    }
+    /* ... mobile adjustments ... */
 }

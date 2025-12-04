@@ -31,28 +31,31 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 4rem;
+    gap: 2rem;
+    /* Reduced gap since profile section is taller */
 }
 
 /* Profile Section */
 .profile-section {
     position: relative;
-    width: 500px;
-    /* Increased to accommodate buttons */
-    height: 300px;
+    width: 600px;
+    /* Wide enough for expansion */
+    height: 400px;
+    /* Tall enough for expansion */
     display: flex;
     justify-content: center;
     align-items: center;
+    /* border: 1px solid red; Debugging */
 }
 
 .interactive-area {
     position: relative;
-    width: 200px;
-    height: 200px;
+    width: 100%;
+    /* Fill the profile section */
+    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    /* cursor: pointer; removed to allow button clicks */
 }
 
 .dp-wrapper {
@@ -65,7 +68,6 @@ body {
     overflow: hidden;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
     cursor: pointer;
-    /* DP is interactive */
 }
 
 .dp-image {
@@ -79,11 +81,12 @@ body {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
-    width: 100%;
-    height: 100%;
+    width: 0;
+    /* Zero width to act as a point source */
+    height: 0;
     pointer-events: none;
     z-index: 5;
+    /* No transform needed, it's at the center */
 }
 
 .social-btn {
@@ -92,72 +95,77 @@ body {
     height: 50px;
     border-radius: 50%;
     background-color: #ffffff;
-    /* White background */
     display: flex;
     justify-content: center;
     align-items: center;
     opacity: 0.2;
-    /* Default opacity */
     transition: all var(--transition-duration) var(--spring-easing);
     pointer-events: auto;
     text-decoration: none;
     overflow: hidden;
     padding: 10px;
-    /* Inward padding */
     box-sizing: border-box;
+    /* Center the button on its coordinate */
+    top: 0;
+    left: 0;
+    margin-top: -25px;
+    /* Half height */
+    margin-left: -25px;
+    /* Half width */
 }
 
 .social-btn img {
     width: 100%;
     height: 100%;
     object-fit: contain;
-    /* Contain to respect padding */
 }
 
-/* Default Positions (Visible beside DP) */
-/* Left Group: Github, Resume, Gmail */
-.social-btn.github {
-    transform: translate(calc(-50% - 110px), calc(-50% + 50px));
-}
+/* 
+   Positioning Logic:
+   Center is (0, 0).
+   Resume/Call are on the horizontal axis (y=0).
+   Github/Gmail/Linkedin/Stackoverflow are at +/- Y offsets.
+   
+   Default State (Collapsed):
+   Radius ~ 120px from center (DP radius is 90px, so 30px gap).
+*/
 
+/* Left Group */
 .social-btn.resume {
-    transform: translate(calc(-50% - 140px), -50%);
+    transform: translate(-130px, 0);
 }
 
 .social-btn.gmail {
-    transform: translate(calc(-50% - 110px), calc(-50% - 50px));
+    transform: translate(-105px, -55px);
 }
 
-/* Right Group: Linkedin, Call, Stackoverflow */
-.social-btn.linkedin {
-    transform: translate(calc(-50% + 110px), calc(-50% - 50px));
+/* Up-Left */
+.social-btn.github {
+    transform: translate(-105px, 55px);
 }
 
+/* Down-Left */
+
+/* Right Group */
 .social-btn.call {
-    transform: translate(calc(-50% + 140px), -50%);
+    transform: translate(130px, 0);
 }
 
-.social-btn.stackoverflow {
-    transform: translate(calc(-50% + 110px), calc(-50% + 50px));
+.social-btn.linkedin {
+    transform: translate(105px, -55px);
 }
+
+/* Up-Right */
+.social-btn.stackoverflow {
+    transform: translate(105px, 55px);
+}
+
+/* Down-Right */
 
 
 /* Hover Effects */
 
-/* DP Hover: Expand buttons & Squircle */
-.dp-wrapper:hover {
-    width: 220px;
-    height: 220px;
-    border-radius: 25%;
-    /* Squircle */
-}
-
-/* When DP is hovered, target sibling buttons via parent interaction logic or JS? 
-   CSS sibling selector (+) or general sibling (~) works if DP is before buttons.
-   In HTML, buttons are BEFORE DP. So we can't use + or ~ to affect buttons when DP is hovered.
-   We need to hover the PARENT (.interactive-area) to trigger effects.
-*/
-
+/* DP Squircle */
 .interactive-area:hover .dp-wrapper {
     width: 220px;
     height: 220px;
@@ -165,69 +173,75 @@ body {
 }
 
 /* Expansion on Container Hover */
-.interactive-area:hover .social-btn.github {
-    transform: translate(calc(-50% - 150px), calc(-50% + 70px));
-    opacity: 0.1;
-}
+/* Expanded Radius ~ 180px */
 
 .interactive-area:hover .social-btn.resume {
-    transform: translate(calc(-50% - 190px), -50%);
+    transform: translate(-190px, 0);
     opacity: 0.1;
 }
 
 .interactive-area:hover .social-btn.gmail {
-    transform: translate(calc(-50% - 150px), calc(-50% - 70px));
+    transform: translate(-160px, -70px);
     opacity: 0.1;
 }
 
-.interactive-area:hover .social-btn.linkedin {
-    transform: translate(calc(-50% + 150px), calc(-50% - 70px));
+.interactive-area:hover .social-btn.github {
+    transform: translate(-160px, 70px);
     opacity: 0.1;
 }
 
 .interactive-area:hover .social-btn.call {
-    transform: translate(calc(-50% + 190px), -50%);
+    transform: translate(190px, 0);
+    opacity: 0.1;
+}
+
+.interactive-area:hover .social-btn.linkedin {
+    transform: translate(160px, -70px);
     opacity: 0.1;
 }
 
 .interactive-area:hover .social-btn.stackoverflow {
-    transform: translate(calc(-50% + 150px), calc(-50% + 70px));
+    transform: translate(160px, 70px);
     opacity: 0.1;
 }
 
 /* Individual Button Hover */
-.social-btn:hover {
-    opacity: 1 !important;
-    z-index: 20;
-    /* We need to re-apply the transform for the specific button to scale it */
-    /* This is tricky because the base transform depends on the state (expanded or not).
-       If we hover a button, the parent is also hovered, so it's in expanded state.
-       So we just need to add scale to the expanded transform.
-    */
-}
-
-.interactive-area:hover .social-btn.github:hover {
-    transform: translate(calc(-50% - 150px), calc(-50% + 70px)) scale(1.3);
-}
+/* We must maintain the expanded transform and add scale */
 
 .interactive-area:hover .social-btn.resume:hover {
-    transform: translate(calc(-50% - 190px), -50%) scale(1.3);
+    transform: translate(-190px, 0) scale(1.3);
+    opacity: 1 !important;
+    z-index: 20;
 }
 
 .interactive-area:hover .social-btn.gmail:hover {
-    transform: translate(calc(-50% - 150px), calc(-50% - 70px)) scale(1.3);
+    transform: translate(-160px, -70px) scale(1.3);
+    opacity: 1 !important;
+    z-index: 20;
 }
 
-.interactive-area:hover .social-btn.linkedin:hover {
-    transform: translate(calc(-50% + 150px), calc(-50% - 70px)) scale(1.3);
+.interactive-area:hover .social-btn.github:hover {
+    transform: translate(-160px, 70px) scale(1.3);
+    opacity: 1 !important;
+    z-index: 20;
 }
 
 .interactive-area:hover .social-btn.call:hover {
-    transform: translate(calc(-50% + 190px), -50%) scale(1.3);
+    transform: translate(190px, 0) scale(1.3);
+    opacity: 1 !important;
+    z-index: 20;
+}
+
+.interactive-area:hover .social-btn.linkedin:hover {
+    transform: translate(160px, -70px) scale(1.3);
+    opacity: 1 !important;
+    z-index: 20;
 }
 
 .interactive-area:hover .social-btn.stackoverflow:hover {
-    transform: translate(calc(-50% + 150px), calc(-50% + 70px)) scale(1.3);
+    transform: translate(160px, 70px) scale(1.3);
+    opacity: 1 !important;
+    z-index: 20;
 }
 
 
@@ -235,9 +249,10 @@ body {
 .text-section {
     display: flex;
     flex-direction: row;
-    gap: 2rem;
-    /* Space between Amusa and Oluwatobi blocks */
+    gap: 3rem;
     align-items: flex-start;
+    margin-top: -2rem;
+    /* Pull text up slightly */
 }
 
 .text-block {
@@ -246,17 +261,15 @@ body {
 }
 
 .name {
-    font-size: 4rem;
-    /* Base size, might need adjustment */
+    font-size: 5rem;
     margin: 0;
     line-height: 1;
     text-transform: uppercase;
 }
 
 .subtitle {
-    font-size: 1rem;
+    font-size: 1.2rem;
     color: #888;
-    /* Fallback */
     margin-top: 0.5rem;
     white-space: nowrap;
 }
@@ -265,29 +278,7 @@ body {
 .left-block {
     align-items: flex-start;
     width: min-content;
-    /* Shrink to fit content */
 }
-
-.left-block .name {
-    /* Amusa needs to span "Senior Software Engineer" */
-    /* We can use text-align-last: justify if we set a fixed width? 
-       Better: Use flexbox on the name characters? No, user said "texts of same font size".
-       "Both need to be slighly bigger (font size) such that the width in pixels for "Amusa" spans the "Senior Software Engineer" text currently below it."
-       This implies we adjust font-size of AMUSA until it matches width of Senior Software Engineer?
-       Or we force the width of the container to be the width of "Senior Software Engineer" and justify "AMUSA".
-    */
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-}
-
-/* We need to split AMUSA into spans? Or use letter-spacing?
-   User said "Amusa spans Senior Software Engineer".
-   If I set width: 100% on .name, and .left-block width is determined by .subtitle (which is longer),
-   then .name will stretch if I use flex/justify.
-   But .name is text.
-   Let's try `text-align: justify; text-align-last: justify;`
-*/
 
 .left-block .name {
     text-align: justify;
@@ -302,7 +293,6 @@ body {
 }
 
 .right-block .name {
-    /* Oluwatobi spans "System Architect ... Artist" */
     width: 100%;
     text-align: justify;
     text-align-last: justify;
@@ -323,32 +313,23 @@ body {
     color: var(--subtitle-color-2);
 }
 
-/* Font Size Adjustments */
-/* User said "Both need to be slightly bigger" */
-.name {
-    font-size: 5rem;
-}
-
-.subtitle {
-    font-size: 1.2rem;
-}
-
 /* Responsive */
 @media (max-width: 768px) {
+    .profile-section {
+        width: 100%;
+        height: auto;
+        min-height: 300px;
+    }
+
     .text-section {
         flex-direction: column;
         align-items: center;
-    }
-
-    .left-block,
-    .right-block {
-        align-items: center;
+        gap: 2rem;
     }
 
     .name {
+        font-size: 3rem;
         text-align: center;
         text-align-last: center;
     }
-
-    /* ... mobile adjustments ... */
 }

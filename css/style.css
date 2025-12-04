@@ -32,26 +32,21 @@ body {
     flex-direction: column;
     align-items: center;
     gap: 2rem;
-    /* Reduced gap since profile section is taller */
 }
 
 /* Profile Section */
 .profile-section {
     position: relative;
     width: 600px;
-    /* Wide enough for expansion */
     height: 400px;
-    /* Tall enough for expansion */
     display: flex;
     justify-content: center;
     align-items: center;
-    /* border: 1px solid red; Debugging */
 }
 
 .interactive-area {
     position: relative;
     width: 100%;
-    /* Fill the profile section */
     height: 100%;
     display: flex;
     justify-content: center;
@@ -82,11 +77,9 @@ body {
     top: 50%;
     left: 50%;
     width: 0;
-    /* Zero width to act as a point source */
     height: 0;
     pointer-events: none;
     z-index: 5;
-    /* No transform needed, it's at the center */
 }
 
 .social-btn {
@@ -105,13 +98,10 @@ body {
     overflow: hidden;
     padding: 10px;
     box-sizing: border-box;
-    /* Center the button on its coordinate */
     top: 0;
     left: 0;
     margin-top: -25px;
-    /* Half height */
     margin-left: -25px;
-    /* Half width */
 }
 
 .social-btn img {
@@ -122,124 +112,117 @@ body {
 
 /* 
    Positioning Logic:
-   Center is (0, 0).
-   Resume/Call are on the horizontal axis (y=0).
-   Github/Gmail/Linkedin/Stackoverflow are at +/- Y offsets.
-   
-   Default State (Collapsed):
-   Radius ~ 120px from center (DP radius is 90px, so 30px gap).
+   Increased offsets to move buttons further from DP by default.
+   Previous: 105/130
+   New: 140/170 (approx +35px)
 */
 
 /* Left Group */
 .social-btn.resume {
-    transform: translate(-130px, 0);
+    transform: translate(-170px, 0);
 }
 
 .social-btn.gmail {
-    transform: translate(-105px, -55px);
+    transform: translate(-140px, -70px);
 }
 
-/* Up-Left */
 .social-btn.github {
-    transform: translate(-105px, 55px);
+    transform: translate(-140px, 70px);
 }
-
-/* Down-Left */
 
 /* Right Group */
 .social-btn.call {
-    transform: translate(130px, 0);
+    transform: translate(170px, 0);
 }
 
 .social-btn.linkedin {
-    transform: translate(105px, -55px);
+    transform: translate(140px, -70px);
 }
 
-/* Up-Right */
 .social-btn.stackoverflow {
-    transform: translate(105px, 55px);
+    transform: translate(140px, 70px);
 }
-
-/* Down-Right */
 
 
 /* Hover Effects */
 
-/* DP Squircle */
-.interactive-area:hover .dp-wrapper {
+/* DP Squircle - ONLY on direct DP hover */
+.dp-wrapper:hover {
     width: 220px;
     height: 220px;
     border-radius: 25%;
 }
 
 /* Expansion on Container Hover */
-/* Expanded Radius ~ 180px */
+/* Push further out on hover */
+/* Previous Expanded: 160/190 */
+/* New Expanded: 200/230 */
 
 .interactive-area:hover .social-btn.resume {
-    transform: translate(-190px, 0);
+    transform: translate(-230px, 0);
     opacity: 0.1;
 }
 
 .interactive-area:hover .social-btn.gmail {
-    transform: translate(-160px, -70px);
+    transform: translate(-200px, -90px);
     opacity: 0.1;
 }
 
 .interactive-area:hover .social-btn.github {
-    transform: translate(-160px, 70px);
+    transform: translate(-200px, 90px);
     opacity: 0.1;
 }
 
 .interactive-area:hover .social-btn.call {
-    transform: translate(190px, 0);
+    transform: translate(230px, 0);
     opacity: 0.1;
 }
 
 .interactive-area:hover .social-btn.linkedin {
-    transform: translate(160px, -70px);
+    transform: translate(200px, -90px);
     opacity: 0.1;
 }
 
 .interactive-area:hover .social-btn.stackoverflow {
-    transform: translate(160px, 70px);
+    transform: translate(200px, 90px);
     opacity: 0.1;
 }
 
 /* Individual Button Hover */
-/* We must maintain the expanded transform and add scale */
+/* Scale up and full opacity */
 
 .interactive-area:hover .social-btn.resume:hover {
-    transform: translate(-190px, 0) scale(1.3);
+    transform: translate(-230px, 0) scale(1.3);
     opacity: 1 !important;
     z-index: 20;
 }
 
 .interactive-area:hover .social-btn.gmail:hover {
-    transform: translate(-160px, -70px) scale(1.3);
+    transform: translate(-200px, -90px) scale(1.3);
     opacity: 1 !important;
     z-index: 20;
 }
 
 .interactive-area:hover .social-btn.github:hover {
-    transform: translate(-160px, 70px) scale(1.3);
+    transform: translate(-200px, 90px) scale(1.3);
     opacity: 1 !important;
     z-index: 20;
 }
 
 .interactive-area:hover .social-btn.call:hover {
-    transform: translate(190px, 0) scale(1.3);
+    transform: translate(230px, 0) scale(1.3);
     opacity: 1 !important;
     z-index: 20;
 }
 
 .interactive-area:hover .social-btn.linkedin:hover {
-    transform: translate(160px, -70px) scale(1.3);
+    transform: translate(200px, -90px) scale(1.3);
     opacity: 1 !important;
     z-index: 20;
 }
 
 .interactive-area:hover .social-btn.stackoverflow:hover {
-    transform: translate(160px, 70px) scale(1.3);
+    transform: translate(200px, 90px) scale(1.3);
     opacity: 1 !important;
     z-index: 20;
 }
@@ -252,7 +235,6 @@ body {
     gap: 3rem;
     align-items: flex-start;
     margin-top: -2rem;
-    /* Pull text up slightly */
 }
 
 .text-block {

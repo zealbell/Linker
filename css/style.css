@@ -53,10 +53,11 @@ body {
     align-items: center;
 }
 
+/* DP Styling */
+/* Ratio 8 units -> 200px */
 .dp-wrapper {
     position: relative;
     width: 200px;
-    /* 8 units */
     height: 200px;
     z-index: 10;
     transition: all var(--transition-duration) var(--spring-easing);
@@ -72,7 +73,7 @@ body {
     object-fit: cover;
 }
 
-/* Buttons */
+/* Buttons Container */
 .buttons-container {
     position: absolute;
     top: 50%;
@@ -83,6 +84,7 @@ body {
     z-index: 5;
 }
 
+/* Button Base Styles */
 .social-btn {
     position: absolute;
     border-radius: 50%;
@@ -95,9 +97,9 @@ body {
     pointer-events: auto;
     text-decoration: none;
     overflow: hidden;
-    padding: 5px;
-    /* Reduced padding for smaller buttons */
+    padding: 10px;
     box-sizing: border-box;
+    /* Centering logic */
     top: 0;
     left: 0;
 }
@@ -108,100 +110,153 @@ body {
     object-fit: contain;
 }
 
-/* Sizing & Positioning */
-/* Base Unit ~25px */
-
-/* Large Buttons (2 units = 50px) */
-.social-btn.resume,
+/* Sizing Ratios */
+/* Large Buttons (2 units -> 50px) */
+.social-btn.github,
 .social-btn.gmail,
 .social-btn.linkedin,
-.social-btn.call {
+.social-btn.stackoverflow {
     width: 50px;
     height: 50px;
     margin-top: -25px;
     margin-left: -25px;
-    padding: 10px;
 }
 
-/* Small Buttons (1 unit = 25px) */
-.social-btn.github,
-.social-btn.stackoverflow {
+/* Small Buttons (1 unit -> 25px) */
+.social-btn.resume,
+.social-btn.call {
     width: 25px;
     height: 25px;
     margin-top: -12.5px;
     margin-left: -12.5px;
     padding: 5px;
+    /* Smaller padding for small buttons */
 }
+
+/* Positioning */
+/* 
+   DP Radius = 100px.
+   Default Offset needs to be visible beside DP.
+   Let's say gap = 20px.
+   Offset = 100 + 20 + (BtnRadius).
+   Large Btn Radius = 25. Offset = 145.
+   Small Btn Radius = 12.5. Offset = 132.5.
+   
+   We need to match the mockup layout.
+   Resume/Call are centered vertically.
+   Github/Gmail and Linkedin/Stackoverflow are radial.
+*/
 
 /* Left Group */
+/* Resume (Small) - Center Left */
 .social-btn.resume {
-    transform: translate(-170px, 0);
+    transform: translate(-140px, 0);
 }
 
+/* Gmail (Large) - Top Left */
 .social-btn.gmail {
-    transform: translate(-140px, -70px);
+    transform: translate(-120px, -60px);
 }
 
+/* Github (Large) - Bottom Left */
 .social-btn.github {
-    transform: translate(-140px, 70px);
+    transform: translate(-120px, 60px);
 }
 
 /* Right Group */
+/* Call (Small) - Center Right */
 .social-btn.call {
-    transform: translate(170px, 0);
+    transform: translate(140px, 0);
 }
 
+/* Linkedin (Large) - Top Right */
 .social-btn.linkedin {
-    transform: translate(140px, -70px);
+    transform: translate(120px, -60px);
 }
 
+/* Stackoverflow (Large) - Bottom Right */
 .social-btn.stackoverflow {
-    transform: translate(140px, 70px);
+    transform: translate(120px, 60px);
 }
 
 
-/* Hover Effects */
+/* Hover Logic - Strict */
 
-/* DP Squircle - ONLY on direct DP hover */
+/* DP Hover: Squircle & Push Buttons */
 .dp-wrapper:hover {
-    width: 240px;
-    /* Expanded size */
-    height: 240px;
     border-radius: 25%;
 }
 
-/* Expansion on Container Hover */
-.interactive-area:hover .social-btn.resume {
-    transform: translate(-230px, 0);
+/* Sibling selector to affect buttons when DP is hovered */
+.dp-wrapper:hover~.buttons-container .social-btn.resume {
+    transform: translate(-200px, 0);
     opacity: 0.1;
 }
 
-.interactive-area:hover .social-btn.gmail {
-    transform: translate(-200px, -90px);
+.dp-wrapper:hover~.buttons-container .social-btn.gmail {
+    transform: translate(-180px, -90px);
     opacity: 0.1;
 }
 
-.interactive-area:hover .social-btn.github {
-    transform: translate(-200px, 90px);
+.dp-wrapper:hover~.buttons-container .social-btn.github {
+    transform: translate(-180px, 90px);
     opacity: 0.1;
 }
 
-.interactive-area:hover .social-btn.call {
-    transform: translate(230px, 0);
+.dp-wrapper:hover~.buttons-container .social-btn.call {
+    transform: translate(200px, 0);
     opacity: 0.1;
 }
 
-.interactive-area:hover .social-btn.linkedin {
-    transform: translate(200px, -90px);
+.dp-wrapper:hover~.buttons-container .social-btn.linkedin {
+    transform: translate(180px, -90px);
     opacity: 0.1;
 }
 
-.interactive-area:hover .social-btn.stackoverflow {
-    transform: translate(200px, 90px);
+.dp-wrapper:hover~.buttons-container .social-btn.stackoverflow {
+    transform: translate(180px, 90px);
     opacity: 0.1;
 }
 
-/* No individual button hover effects as requested */
+/* Individual Button Hover */
+/* Only affects the button itself. DP stays circle (because mouse is not on DP). */
+.social-btn:hover {
+    opacity: 1 !important;
+    z-index: 20;
+    transform: scale(1.3);
+    /* This overrides the translate! We need to keep translate. */
+}
+
+/* We need to re-declare translate for hover state to combine with scale.
+   Since we have different translates for different buttons, we need specific rules.
+   AND we need to handle the case where we hover a button *after* hovering DP (transitioning out).
+   But strictly speaking, if mouse is on button, it's NOT on DP, so DP hover is false.
+   So we use the *default* translate + scale.
+*/
+
+.social-btn.resume:hover {
+    transform: translate(-140px, 0) scale(1.3);
+}
+
+.social-btn.gmail:hover {
+    transform: translate(-120px, -60px) scale(1.3);
+}
+
+.social-btn.github:hover {
+    transform: translate(-120px, 60px) scale(1.3);
+}
+
+.social-btn.call:hover {
+    transform: translate(140px, 0) scale(1.3);
+}
+
+.social-btn.linkedin:hover {
+    transform: translate(120px, -60px) scale(1.3);
+}
+
+.social-btn.stackoverflow:hover {
+    transform: translate(120px, 60px) scale(1.3);
+}
 
 
 /* Text Section */
@@ -209,7 +264,8 @@ body {
     display: flex;
     flex-direction: row;
     gap: 3rem;
-    align-items: flex-start;
+    align-items: flex-end;
+    /* Align bottoms */
     margin-top: -2rem;
 }
 
@@ -227,7 +283,8 @@ body {
 
 .subtitle {
     font-size: 1.2rem;
-    color: #888;
+    color: #ffffff;
+    /* Senior Software Engineer is White */
     margin-top: 0.5rem;
     white-space: nowrap;
 }
@@ -265,10 +322,12 @@ body {
 
 .subtitle.system-architect {
     color: var(--subtitle-color-1);
+    /* #737373 */
 }
 
 .subtitle.artist {
     color: var(--subtitle-color-2);
+    /* #545454 */
 }
 
 /* Responsive */

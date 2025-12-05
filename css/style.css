@@ -306,7 +306,8 @@ body {
 }
 
 .founder:hover {
-    color: #ffffff;
+    color: #8B0000;
+    /* Dark Red */
 }
 
 /* Left Block Alignment */
@@ -333,15 +334,23 @@ body {
     text-align-last: justify;
 }
 
-/* Subtitle Colors */
+/* Subtitle Row for Right Block */
+.subtitle-row {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 0.5rem;
+}
+
+/* Subtitle Colors & Alignment */
 .subtitle.system-architect {
     color: var(--subtitle-color-1);
 }
 
 .subtitle.artist {
     color: var(--subtitle-color-2);
-    margin-top: 0.2rem;
-    /* Match Founder margin */
+    /* Shift down to align with Founder (approx 1.2rem + 0.2rem gap) */
+    transform: translateY(1.4rem);
 }
 
 /* Responsive */

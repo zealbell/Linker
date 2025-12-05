@@ -21,29 +21,31 @@ body {
     color: var(--text-color);
     font-family: 'OCRA', sans-serif;
     height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    width: 100vw;
     overflow: hidden;
-}
-
-.container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 2rem;
-}
-
-/* Profile Section */
-.profile-section {
     position: relative;
+    /* For absolute positioning of children */
+}
+
+/* Removed flex container styles from body/container to allow absolute positioning */
+.container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+/* Profile Section - Centered */
+.profile-section {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     width: 1000px;
-    /* Increased width for scaled expansion */
     height: 625px;
-    /* Scaled height */
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index: 10;
 }
 
 .interactive-area {
@@ -55,8 +57,7 @@ body {
     align-items: center;
 }
 
-/* DP Styling - Scaled 1.25x */
-/* 200px * 1.25 = 250px */
+/* DP Styling - Scaled 1.25x (250px) */
 .dp-wrapper {
     position: relative;
     width: 250px;
@@ -94,7 +95,8 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    opacity: 0.2;
+    opacity: 0.4;
+    /* Increased to 40% */
     transition: all var(--transition-duration) var(--spring-easing);
     pointer-events: auto;
     text-decoration: none;
@@ -112,7 +114,7 @@ body {
 }
 
 /* Sizing Ratios - Scaled 1.25x */
-/* Large Buttons: 50px * 1.25 = 62.5px */
+/* Large Buttons: 62.5px */
 .social-btn.github,
 .social-btn.gmail,
 .social-btn.linkedin,
@@ -123,7 +125,7 @@ body {
     margin-left: -31.25px;
 }
 
-/* Small Buttons: 25px * 1.25 = 31.25px */
+/* Small Buttons: 31.25px */
 .social-btn.resume,
 .social-btn.call {
     width: 31.25px;
@@ -131,46 +133,46 @@ body {
     margin-top: -15.625px;
     margin-left: -15.625px;
     padding: 6px;
-    /* Scaled padding */
 }
 
-/* Positioning - Scaled 1.25x */
+/* Positioning - Scaled 1.25x & Reduced Gutter */
 /* 
-   Inner X: 140 * 1.25 = 175px
-   Inner Y: 35 * 1.25 = 43.75px
-   Outer X: 195 * 1.25 = 243.75px -> 244px
+   Inner X: +/- 165px
+   Inner Y: +/- 30px
+   Outer X: +/- 221px
+   Outer Y: 0
 */
 
 /* Left Group */
 /* Resume (Outer, Center) */
 .social-btn.resume {
-    transform: translate(-244px, 0);
+    transform: translate(-221px, 0);
 }
 
 /* Gmail (Inner, Top) */
 .social-btn.gmail {
-    transform: translate(-175px, -44px);
+    transform: translate(-165px, -30px);
 }
 
 /* Github (Inner, Bottom) */
 .social-btn.github {
-    transform: translate(-175px, 44px);
+    transform: translate(-165px, 30px);
 }
 
 /* Right Group */
 /* Call (Outer, Center) */
 .social-btn.call {
-    transform: translate(244px, 0);
+    transform: translate(221px, 0);
 }
 
 /* Linkedin (Inner, Top) */
 .social-btn.linkedin {
-    transform: translate(175px, -44px);
+    transform: translate(165px, -30px);
 }
 
 /* Stackoverflow (Inner, Bottom) */
 .social-btn.stackoverflow {
-    transform: translate(175px, 44px);
+    transform: translate(165px, 30px);
 }
 
 
@@ -182,40 +184,41 @@ body {
     border-radius: 25%;
 }
 
-/* Push Effect - Scaled 1.25x */
+/* Push Effect - Scaled 1.25x & Reduced Gutter */
 /* 
-   Previous Inner Push X: 190 * 1.25 = 237.5px -> 238px
-   Previous Outer Push X: 245 * 1.25 = 306.25px -> 306px
-   Y offsets kept same as base position for stability
+   Inner Push X: +/- 228px
+   Inner Push Y: +/- 30px
+   Outer Push X: +/- 284px
+   Outer Push Y: 0
 */
 
 .dp-wrapper:hover~.buttons-container .social-btn.resume {
-    transform: translate(-306px, 0);
+    transform: translate(-284px, 0);
     opacity: 0.1;
 }
 
 .dp-wrapper:hover~.buttons-container .social-btn.gmail {
-    transform: translate(-238px, -44px);
+    transform: translate(-228px, -30px);
     opacity: 0.1;
 }
 
 .dp-wrapper:hover~.buttons-container .social-btn.github {
-    transform: translate(-238px, 44px);
+    transform: translate(-228px, 30px);
     opacity: 0.1;
 }
 
 .dp-wrapper:hover~.buttons-container .social-btn.call {
-    transform: translate(306px, 0);
+    transform: translate(284px, 0);
     opacity: 0.1;
 }
 
 .dp-wrapper:hover~.buttons-container .social-btn.linkedin {
-    transform: translate(238px, -44px);
+    transform: translate(228px, -30px);
     opacity: 0.1;
 }
 
 .dp-wrapper:hover~.buttons-container .social-btn.stackoverflow {
-    transform: translate(238px, 44px);
+    transform: translate(228px, 30px);
     opacity: 0.1;
 }
 
@@ -228,38 +231,43 @@ body {
 
 /* Specific Hover Transforms (Default Position + Scale) */
 .social-btn.resume:hover {
-    transform: translate(-244px, 0) scale(1.3);
+    transform: translate(-221px, 0) scale(1.3);
 }
 
 .social-btn.gmail:hover {
-    transform: translate(-175px, -44px) scale(1.3);
+    transform: translate(-165px, -30px) scale(1.3);
 }
 
 .social-btn.github:hover {
-    transform: translate(-175px, 44px) scale(1.3);
+    transform: translate(-165px, 30px) scale(1.3);
 }
 
 .social-btn.call:hover {
-    transform: translate(244px, 0) scale(1.3);
+    transform: translate(221px, 0) scale(1.3);
 }
 
 .social-btn.linkedin:hover {
-    transform: translate(175px, -44px) scale(1.3);
+    transform: translate(165px, -30px) scale(1.3);
 }
 
 .social-btn.stackoverflow:hover {
-    transform: translate(175px, 44px) scale(1.3);
+    transform: translate(165px, 30px) scale(1.3);
 }
 
 
-/* Text Section */
+/* Text Section - Centered & Offset */
 .text-section {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    /* Offset upwards by 1.5x DP height (250 * 1.5 = 375px) */
+    transform: translate(-50%, calc(-50% - 375px));
     display: flex;
     flex-direction: row;
     gap: 3rem;
     align-items: flex-end;
-    margin-bottom: -2rem;
-    /* Pull profile up slightly */
+    z-index: 5;
+    width: max-content;
 }
 
 .text-block {
@@ -269,7 +277,6 @@ body {
 
 .name {
     font-size: 5.625rem;
-    /* 112.5% of 5rem */
     margin: 0;
     line-height: 1;
     text-transform: uppercase;
@@ -333,7 +340,8 @@ body {
         flex-direction: column;
         align-items: center;
         gap: 2rem;
-        margin-bottom: 2rem;
+        transform: translate(-50%, calc(-50% - 300px));
+        /* Adjusted offset for mobile */
     }
 
     .name {

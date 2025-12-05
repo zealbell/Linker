@@ -352,6 +352,11 @@ body {
     /* No vertical shift, aligned with System Architect */
 }
 
+/* Remove double margin for subtitles inside the row */
+.subtitle-row .subtitle {
+    margin-top: 0;
+}
+
 /* Responsive */
 @media (max-width: 768px) {
     .profile-section {

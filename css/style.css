@@ -349,8 +349,7 @@ body {
 
 .subtitle.artist {
     color: var(--subtitle-color-2);
-    /* Shift down to align with Founder (approx 1.2rem + 0.2rem gap) */
-    transform: translateY(1.4rem);
+    /* No vertical shift, aligned with System Architect */
 }
 
 /* Responsive */

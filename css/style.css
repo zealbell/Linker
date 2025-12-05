@@ -37,8 +37,9 @@ body {
 /* Profile Section */
 .profile-section {
     position: relative;
-    width: 600px;
-    height: 400px;
+    width: 800px;
+    /* Increased width to accommodate larger expansion */
+    height: 500px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -54,7 +55,6 @@ body {
 }
 
 /* DP Styling */
-/* Ratio 8 units -> 200px */
 .dp-wrapper {
     position: relative;
     width: 200px;
@@ -99,7 +99,6 @@ body {
     overflow: hidden;
     padding: 10px;
     box-sizing: border-box;
-    /* Centering logic */
     top: 0;
     left: 0;
 }
@@ -130,132 +129,126 @@ body {
     margin-top: -12.5px;
     margin-left: -12.5px;
     padding: 5px;
-    /* Smaller padding for small buttons */
 }
 
-/* Positioning */
+/* Positioning - Triangle Layout */
 /* 
-   DP Radius = 100px.
-   Default Offset needs to be visible beside DP.
-   Let's say gap = 20px.
-   Offset = 100 + 20 + (BtnRadius).
-   Large Btn Radius = 25. Offset = 145.
-   Small Btn Radius = 12.5. Offset = 132.5.
-   
-   We need to match the mockup layout.
-   Resume/Call are centered vertically.
-   Github/Gmail and Linkedin/Stackoverflow are radial.
+   Inner Layer X: +/- 140px
+   Inner Layer Y: +/- 35px (Slightly more than 32.5 for breathing room)
+   Outer Layer X: +/- 195px
+   Outer Layer Y: 0
 */
 
 /* Left Group */
-/* Resume (Small) - Center Left */
+/* Resume (Outer, Center) */
 .social-btn.resume {
-    transform: translate(-140px, 0);
+    transform: translate(-195px, 0);
 }
 
-/* Gmail (Large) - Top Left */
+/* Gmail (Inner, Top) */
 .social-btn.gmail {
-    transform: translate(-120px, -60px);
+    transform: translate(-140px, -35px);
 }
 
-/* Github (Large) - Bottom Left */
+/* Github (Inner, Bottom) */
 .social-btn.github {
-    transform: translate(-120px, 60px);
+    transform: translate(-140px, 35px);
 }
 
 /* Right Group */
-/* Call (Small) - Center Right */
+/* Call (Outer, Center) */
 .social-btn.call {
-    transform: translate(140px, 0);
+    transform: translate(195px, 0);
 }
 
-/* Linkedin (Large) - Top Right */
+/* Linkedin (Inner, Top) */
 .social-btn.linkedin {
-    transform: translate(120px, -60px);
+    transform: translate(140px, -35px);
 }
 
-/* Stackoverflow (Large) - Bottom Right */
+/* Stackoverflow (Inner, Bottom) */
 .social-btn.stackoverflow {
-    transform: translate(120px, 60px);
+    transform: translate(140px, 35px);
 }
 
 
-/* Hover Logic - Strict */
+/* Hover Logic */
 
-/* DP Hover: Squircle & Push Buttons */
+/* DP Hover: Scale 1.5x & Squircle */
 .dp-wrapper:hover {
+    transform: scale(1.5);
     border-radius: 25%;
 }
 
-/* Sibling selector to affect buttons when DP is hovered */
+/* Push Effect */
+/* 
+   DP Radius becomes 150px.
+   New Inner X: 150 + 15 + 25 = 190px.
+   New Outer X: 190 + 25 + 15 + 12.5 = 242.5px -> ~245px.
+   Y offsets scale slightly to maintain separation? Let's keep Y constant or scale slightly.
+   Let's keep Y constant for stability, just push out X.
+*/
+
 .dp-wrapper:hover~.buttons-container .social-btn.resume {
-    transform: translate(-200px, 0);
+    transform: translate(-245px, 0);
     opacity: 0.1;
 }
 
 .dp-wrapper:hover~.buttons-container .social-btn.gmail {
-    transform: translate(-180px, -90px);
+    transform: translate(-190px, -35px);
     opacity: 0.1;
 }
 
 .dp-wrapper:hover~.buttons-container .social-btn.github {
-    transform: translate(-180px, 90px);
+    transform: translate(-190px, 35px);
     opacity: 0.1;
 }
 
 .dp-wrapper:hover~.buttons-container .social-btn.call {
-    transform: translate(200px, 0);
+    transform: translate(245px, 0);
     opacity: 0.1;
 }
 
 .dp-wrapper:hover~.buttons-container .social-btn.linkedin {
-    transform: translate(180px, -90px);
+    transform: translate(190px, -35px);
     opacity: 0.1;
 }
 
 .dp-wrapper:hover~.buttons-container .social-btn.stackoverflow {
-    transform: translate(180px, 90px);
+    transform: translate(190px, 35px);
     opacity: 0.1;
 }
 
 /* Individual Button Hover */
-/* Only affects the button itself. DP stays circle (because mouse is not on DP). */
 .social-btn:hover {
     opacity: 1 !important;
     z-index: 20;
     transform: scale(1.3);
-    /* This overrides the translate! We need to keep translate. */
 }
 
-/* We need to re-declare translate for hover state to combine with scale.
-   Since we have different translates for different buttons, we need specific rules.
-   AND we need to handle the case where we hover a button *after* hovering DP (transitioning out).
-   But strictly speaking, if mouse is on button, it's NOT on DP, so DP hover is false.
-   So we use the *default* translate + scale.
-*/
-
+/* Specific Hover Transforms (Default Position + Scale) */
 .social-btn.resume:hover {
-    transform: translate(-140px, 0) scale(1.3);
+    transform: translate(-195px, 0) scale(1.3);
 }
 
 .social-btn.gmail:hover {
-    transform: translate(-120px, -60px) scale(1.3);
+    transform: translate(-140px, -35px) scale(1.3);
 }
 
 .social-btn.github:hover {
-    transform: translate(-120px, 60px) scale(1.3);
+    transform: translate(-140px, 35px) scale(1.3);
 }
 
 .social-btn.call:hover {
-    transform: translate(140px, 0) scale(1.3);
+    transform: translate(195px, 0) scale(1.3);
 }
 
 .social-btn.linkedin:hover {
-    transform: translate(120px, -60px) scale(1.3);
+    transform: translate(140px, -35px) scale(1.3);
 }
 
 .social-btn.stackoverflow:hover {
-    transform: translate(120px, 60px) scale(1.3);
+    transform: translate(140px, 35px) scale(1.3);
 }
 
 
@@ -265,7 +258,6 @@ body {
     flex-direction: row;
     gap: 3rem;
     align-items: flex-end;
-    /* Align bottoms */
     margin-top: -2rem;
 }
 
@@ -275,7 +267,8 @@ body {
 }
 
 .name {
-    font-size: 5rem;
+    font-size: 6.25rem;
+    /* 125% of 5rem */
     margin: 0;
     line-height: 1;
     text-transform: uppercase;
@@ -284,7 +277,6 @@ body {
 .subtitle {
     font-size: 1.2rem;
     color: #ffffff;
-    /* Senior Software Engineer is White */
     margin-top: 0.5rem;
     white-space: nowrap;
 }
@@ -322,12 +314,10 @@ body {
 
 .subtitle.system-architect {
     color: var(--subtitle-color-1);
-    /* #737373 */
 }
 
 .subtitle.artist {
     color: var(--subtitle-color-2);
-    /* #545454 */
 }
 
 /* Responsive */
@@ -335,7 +325,7 @@ body {
     .profile-section {
         width: 100%;
         height: auto;
-        min-height: 300px;
+        min-height: 400px;
     }
 
     .text-section {
@@ -345,7 +335,7 @@ body {
     }
 
     .name {
-        font-size: 3rem;
+        font-size: 4rem;
         text-align: center;
         text-align-last: center;
     }

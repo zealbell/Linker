@@ -32,12 +32,13 @@ body {
     position: relative;
 }
 
-/* Profile Section - Centered */
+/* Profile Section - Centered & Shifted Down */
 .profile-section {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    /* Shift down by 25% of DP height (250 * 0.25 = 62.5px) */
+    transform: translate(-50%, calc(-50% + 62.5px));
     width: 1000px;
     height: 625px;
     display: flex;
@@ -130,7 +131,6 @@ body {
     margin-top: -19.53px;
     margin-left: -19.53px;
     padding: 8px;
-    /* Slightly larger padding */
 }
 
 /* Positioning - Scaled 1.25x & Gutter 100% */
@@ -263,7 +263,8 @@ body {
     display: flex;
     flex-direction: row;
     gap: 3rem;
-    align-items: flex-end;
+    align-items: flex-start;
+    /* Align tops of names */
     z-index: 5;
     width: max-content;
 }
@@ -285,6 +286,20 @@ body {
     color: #ffffff;
     margin-top: 0.5rem;
     white-space: nowrap;
+}
+
+/* Founder Link */
+.founder {
+    display: block;
+    color: #545454;
+    text-decoration: none;
+    transition: color 0.3s;
+    margin-top: 0.2rem;
+    /* Small gap under Senior Eng */
+}
+
+.founder:hover {
+    color: #ffffff;
 }
 
 /* Left Block Alignment */
@@ -339,7 +354,6 @@ body {
         align-items: center;
         gap: 2rem;
         transform: translate(-50%, calc(-50% - 250px));
-        /* Adjusted offset for mobile */
     }
 
     .name {
